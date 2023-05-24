@@ -2,39 +2,48 @@
  
   <p>
     <label for="firstname">First Name</label>
-    <input type="text" id="firstname" name="firstname" ngModel>
+    <input type="text" id="firstname" name="firstname" #firstname="ngModel" [(ngModel)]="contact.firstname">
   </p>
  
   <p>
     <label for="lastname">Last Name</label>
-    <input type="text" id="lastname" name="lastname" ngModel>
+    <input type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="contact.lastname">
   </p>
  
   <p>
     <label for="email">Email </label>
-    <input type="text" id="email" name="email" ngModel>
+    <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="contact.email">
   </p>
  
   <p>
     <label for="gender">Geneder</label>
-    <input type="radio" value="male" id="gender" name="gender" ngModel> Male
-    <input type="radio" value="female" id="gender" name="gender" ngModel> Female
+    <input type="radio" value="male" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender"> Male
+    <input type="radio" value="female" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender"> Female
   </p>
  
   <p>
     <label for="isMarried">Married</label>
-    <input type="checkbox" id="isMarried" name="isMarried" ngModel>
+    <input type="checkbox" id="isMarried" name="isMarried" #isToc="ngModel" [(ngModel)]="contact.isToc">
   </p>
  
   <br>
+
   <div>Country</div>
-  <select name="country" >
-    <option [ngValue]="c.id" *ngFor="let c of countryList">
-      {{c.name}}
+  <select name="country" ngModel style="margin-bottom: 20px">
+    <option [ngValue]="country.id" *ngFor="let country of countryList">
+      {{ country.name }}
     </option>
   </select>
+
   <p>
     <button type="submit">Submit</button>
   </p>
  
 </form>
+
+<br>
+<pre>
+  <code>
+   {{contactForm.value | json}}
+  </code>
+</pre>
