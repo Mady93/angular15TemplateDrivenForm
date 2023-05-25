@@ -1,0 +1,16 @@
+.is-invalid{
+    border: 2px solid red;
+    background-color: #FFCCCC;
+}
+
+.is-valid{
+    border: 2px solid rgb(0, 26, 255);
+    background-color: #d3e3f8;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    border: 1px solid red;
+    padding: 10px;
+  }

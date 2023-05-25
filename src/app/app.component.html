@@ -1,20 +1,83 @@
-<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
  
   <p>
     <label for="firstname">First Name</label>
-    <input type="text" id="firstname" name="firstname" #firstname="ngModel" [(ngModel)]="contact.firstname">
+    <input type="text" id="firstname" name="firstname" #firstname="ngModel" [(ngModel)]="contact.firstname" 
+    minlength="2" maxlength="25" pattern="^[a-zA-Z]+$" 
+    [ngClass]= "{
+      'is-invalid': firstname.invalid && firstname.dirty,
+      'is-valid': firstname.valid && firstname.dirty
+      }" required >
   </p>
+
+  <div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)">
+   <!--  Invalid firstname! -->
+   [ngClass]="error"
+
+    <div *ngIf="firstname.errors['required']" && firstname.touched>
+      Firstname is required!
+    </div>
+    <div *ngIf="firstname.errors['minlength'] && firstname.touched">
+      Firstname minimum lenghth is {{firstname.errors['minlength'].requiredLength}} 
+    </div>
+
+    <div *ngIf="firstname.errors['pattern']" && firstname.touched>
+      Firstname pattern is {{firstname.errors['pattern'].requiredPattern}} 
+      Inserire lettere da aA - zZ senza spazzi vuoti!
+    </div>
+  </div>
  
   <p>
     <label for="lastname">Last Name</label>
-    <input type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="contact.lastname">
+    <input type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="contact.lastname" 
+    minlength="2" maxlength="25" pattern="^[a-zA-Z]+$" [ngClass]= "{
+      'is-invalid': lastname.invalid && lastname.dirty,
+      'is-valid': lastname.valid && lastname.dirty
+      }" required>
   </p>
+ 
+  <div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)">
+    <!-- Invalid lastname! -->
+    [ngClass]="error"
+
+    <div *ngIf="lastname.errors['required']" && lastname.touched>
+      Lastname is required!
+    </div>
+    <div *ngIf="lastname.errors['minlength']" && lastname.touched>
+      Lastname minimum lenghth is {{lastname.errors['minlength'].requiredLength}} 
+    </div>
+
+    <div *ngIf="lastname.errors['pattern']" && lastname.touched>
+      lastname pattern is {{lastname.errors['pattern'].requiredPattern}} 
+      Inserire lettere da aA - zZ senza spazzi vuoti!
+    </div>
+  </div>
+
  
   <p>
     <label for="email">Email </label>
-    <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="contact.email">
+    <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="contact.email" 
+    pattern="[a-z0-9._%+-]+@[a-z0-9-.]+\.[a-z]{2,}$" 
+    [ngClass]= "{
+      'is-invalid': email.invalid && email.dirty,
+      'is-valid': email.valid && email.dirty
+      }" required>
   </p>
  
+  <div *ngIf="!email.valid && (email.dirty || email.touched)">
+    <!-- Invalid email! -->
+    [ngClass]="error"
+
+    <div *ngIf="email.errors['required']" && email.touched>
+      Email is required!
+    </div>
+
+    <div *ngIf="email.errors['pattern']" && email.touched>
+      Email pattern is {{email.errors['pattern'].requiredPattern}}
+    </div>
+  </div>
+
+
   <p>
     <label for="gender">Geneder</label>
     <input type="radio" value="male" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender"> Male
@@ -23,7 +86,7 @@
  
   <p>
     <label for="isMarried">Married</label>
-    <input type="checkbox" id="isMarried" name="isMarried" #isToc="ngModel" [(ngModel)]="contact.isToc">
+    <input type="checkbox" id="isMarried" name="isMarried" #isToc="ngModel" [(ngModel)]="contact.isToc" required>
   </p>
  
   <br>
@@ -36,7 +99,7 @@
   </select>
 
   <p>
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="contactForm.invalid">Submit</button>
   </p>
  
 </form>

@@ -11,6 +11,7 @@ import { Contact } from './model/Contact';
 export class AppComponent implements OnInit {
   title = 'angular7TemplateDrivenForm';
 
+
   countryList: country[] = [
     new country("1", "India"),
     new country("2", "Usa"),
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
     }
  
   }
-    
+
   
   onSubmit(contactForm: any) {
     console.log(contactForm.value);
