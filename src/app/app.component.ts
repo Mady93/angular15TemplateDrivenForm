@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { country } from './model/country';
 import { Contact } from './model/Contact'; 
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'angular7TemplateDrivenForm';
+  title = 'Template Driven Form';
 
 
   countryList: country[] = [
@@ -18,6 +17,9 @@ export class AppComponent implements OnInit {
     new country("3", "England"),
   ];
 
+
+
+
   contact: Contact;
    
   ngOnInit(){
@@ -25,14 +27,24 @@ export class AppComponent implements OnInit {
       firstname: "", 
       lastname: "",
       gender: "",
-      isToc: true,
-      email: ""
+      //isToc: true,
+      email: "",
+       city: "",
+        street: "",
+        zip_code: ""
     }
  
   }
 
   
   onSubmit(contactForm: any) {
+
+    alert("You have submitted the form on submit! Now let's see if contactForm is invalid: "+contactForm.invalid);
+
+    if(contactForm){
     console.log(contactForm.value);
+  }else{
+    console.log("ERROR! contactForm === false! ")
   }
+}
 }

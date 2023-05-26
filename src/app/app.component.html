@@ -1,72 +1,102 @@
+<div style="text-align: center;">
+  <p [ngClass]=" 'title' ">{{title}}</p>
+  <br>
+  <br>
+</div>
+
+
+
+
+<div style="text-align: center;">
+
 <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
- 
-  <p>
-    <label for="firstname">First Name</label>
-    <input type="text" id="firstname" name="firstname" #firstname="ngModel" [(ngModel)]="contact.firstname" 
-    minlength="2" maxlength="25" pattern="^[a-zA-Z]+$" 
-    [ngClass]= "{
+
+  <div>
+    <label for="firstname">First Name: </label>
+    <input type="text" id="firstname" name="firstname" #firstname="ngModel" [(ngModel)]="contact.firstname"
+      minlength="2" maxlength="25" pattern="^[a-zA-Z]+$" [ngClass]="{
       'is-invalid': firstname.invalid && firstname.dirty,
       'is-valid': firstname.valid && firstname.dirty
-      }" required >
-  </p>
+      }" required>
+  </div>
+  <br>
 
-  <div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)">
-   <!--  Invalid firstname! -->
-   [ngClass]=" 'error' "
+  <div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)" [ngClass]=" 'error' ">
+    <!--  Invalid firstname! -->
+
 
     <div *ngIf="firstname.errors['required'] && firstname.touched">
       Firstname is required!
     </div>
     <div *ngIf="firstname.errors['minlength'] && firstname.touched">
-      Firstname minimum lenghth is {{firstname.errors['minlength'].requiredLength}} 
+      Firstname minimum lenghth is {{firstname.errors['minlength'].requiredLength}}
     </div>
 
     <div *ngIf="firstname.errors['pattern'] && firstname.touched">
-      Firstname pattern is {{firstname.errors['pattern'].requiredPattern}} 
-      Inserire lettere da aA - zZ senza spazzi vuoti!
+      Firstname pattern is {{firstname.errors['pattern'].requiredPattern}}
+      <p>
+        Enter only characters from 
+      <span style="color: darkred;">a</span> to <span style="color: darkred;">z</span>
+       or <span style="color: darkred;">A</span> to <span style="color: darkred;">Z</span>
+        without any empty spaces!
+      </p>
     </div>
   </div>
- 
-  <p>
-    <label for="lastname">Last Name</label>
-    <input type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="contact.lastname" 
-    minlength="2" maxlength="25" pattern="^[a-zA-Z]+$" [ngClass]= "{
+  <br>
+
+
+
+
+  <div>
+    <label for="lastname">Last Name: </label>
+    <input type="text" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="contact.lastname" minlength="2"
+      maxlength="25" pattern="^[a-zA-Z]+$" [ngClass]="{
       'is-invalid': lastname.invalid && lastname.dirty,
       'is-valid': lastname.valid && lastname.dirty
       }" required>
-  </p>
- 
-  <div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)">
+  </div>
+
+  <br>
+
+  <div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)" [ngClass]="'error'">
     <!-- Invalid lastname! -->
-    [ngClass]="'error'"
 
     <div *ngIf="lastname.errors['required'] && lastname.touched">
       Lastname is required!
     </div>
     <div *ngIf="lastname.errors['minlength'] && lastname.touched">
-      Lastname minimum lenghth is {{lastname.errors['minlength'].requiredLength}} 
+      Lastname minimum lenghth is {{lastname.errors['minlength'].requiredLength}}
     </div>
 
     <div *ngIf="lastname.errors['pattern'] && lastname.touched">
-      lastname pattern is {{lastname.errors['pattern'].requiredPattern}} 
-      Inserire lettere da aA - zZ senza spazzi vuoti!
+      lastname pattern is {{lastname.errors['pattern'].requiredPattern}}
+      <p>
+        Enter only characters from 
+      <span style="color: darkred;">a</span> to <span style="color: darkred;">z</span>
+       or <span style="color: darkred;">A</span> to <span style="color: darkred;">Z</span>
+        without any empty spaces!
+      </p>
     </div>
   </div>
 
- 
-  <p>
-    <label for="email">Email </label>
-    <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="contact.email" 
-    pattern="[a-z0-9._%+-]+@[a-z0-9-.]+\.[a-z]{2,}$" 
-    [ngClass]= "{
+  <br>
+
+
+
+
+  <div>
+    <label for="email">Email: </label>
+    <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="contact.email"
+      pattern="[a-z0-9._%+-]+@[a-z0-9-.]+\.[a-z]{2,}$" [ngClass]="{
       'is-invalid': email.invalid && email.dirty,
       'is-valid': email.valid && email.dirty
       }" required>
-  </p>
- 
-  <div *ngIf="!email.valid && (email.dirty || email.touched)">
+  </div>
+
+  <br>
+
+  <div *ngIf="!email.valid && (email.dirty || email.touched)" [ngClass]="'error'">
     <!-- Invalid email! -->
-    [ngClass]="'error'"
 
     <div *ngIf="email.errors['required'] && email.touched">
       Email is required!
@@ -74,39 +104,203 @@
 
     <div *ngIf="email.errors['pattern'] && email.touched">
       Email pattern is {{email.errors['pattern'].requiredPattern}}
+      <p>
+        Enter characters from 
+      <span style="color: darkred;">a-A</span> to <span style="color: darkred;">z-Z</span>
+       ,special characters <span style="color: darkred;">._%+-</span>
+        and number <span style="color: darkred;">0-9</span>
+      </p>
     </div>
   </div>
 
-
-  <p>
-    <label for="gender">Geneder</label>
-    <input type="radio" value="male" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender"> Male
-    <input type="radio" value="female" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender"> Female
-  </p>
- 
-  <p>
-    <label for="isMarried">Married</label>
-    <input type="checkbox" id="isMarried" name="isMarried" #isToc="ngModel" [(ngModel)]="contact.isToc" required>
-  </p>
- 
   <br>
 
-  <div>Country</div>
+
+
+
+
+  <div>
+    <label for="gender">Geneder: </label>
+    <input type="radio" value="male" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender" required>
+    Male
+    <input type="radio" value="female" id="gender" name="gender" #gender="ngModel" [(ngModel)]="contact.gender"
+      required>
+    Female
+  </div>
+
+  <div *ngIf="!gender.valid && (gender.dirty || gender.touched)" [ngClass]=" 'error' ">
+    <!--  Invalid gender! -->
+
+    <div *ngIf="gender.errors['required'] && gender.touched">
+      Gender is required!
+    </div>
+
+  </div>
+
+
+  <br>
+
+  <!-- <p>
+    <label for="isMarried">Married</label>
+    <input type="checkbox" id="isMarried" name="isMarried" #isToc="ngModel" [(ngModel)]="contact.isToc" required>
+  </p> 
+  
+  
+  <br> -->
+
+  <div>Country: </div>
   <select name="country" ngModel style="margin-bottom: 20px">
     <option [ngValue]="country.id" *ngFor="let country of countryList">
       {{ country.name }}
     </option>
   </select>
 
-  <p>
-    <button type="submit" [disabled]="contactForm.invalid">Submit</button>
-  </p>
- 
+  <br>
+  <br>
+  <br>
+
+
+
+
+
+
+
+
+
+
+  <div>
+    Address
+    <br>
+    <label for="">City: </label>
+    <input type="text" id="city" name="city" #city="ngModel" [(ngModel)]="contact.city" minlength="2" maxlength="25"
+      pattern="^[^0-9]*$" [ngClass]="{
+    'is-invalid': city.invalid && city.dirty,
+    'is-valid': city.valid && city.dirty
+    }" required>
+    <br>
+    <br>
+
+    <div *ngIf="!city.valid && (city.dirty || city.touched)" [ngClass]=" 'error' ">
+      <!--  Invalid city! -->
+
+
+      <div *ngIf="city.errors['required'] && city.touched">
+        City is required!
+      </div>
+      <div *ngIf="city.errors['minlength'] && city.touched">
+        City minimum lenghth is {{city.errors['minlength'].requiredLength}}
+      </div>
+
+      <div *ngIf="city.errors['pattern'] && city.touched">
+        City pattern is {{city.errors['pattern'].requiredPattern}}
+        <p>Inserting numbers is prohibited!</p>
+      </div>
+    </div>
+
+    <br>
+
+
+
+
+
+    <label for="">Street: </label>
+    <input type="text" id="street" name="street" #street="ngModel" [(ngModel)]="contact.street" minlength="2"
+      maxlength="25" pattern="^[^0-9]*$" [ngClass]="{
+    'is-invalid': street.invalid && street.dirty,
+    'is-valid': street.valid && street.dirty
+    }" required>
+    <br>
+    <br>
+
+    <div *ngIf="!street.valid && (street.dirty || street.touched)" [ngClass]=" 'error' ">
+      <!--  Invalid street! -->
+
+      <div *ngIf="street.errors['required'] && street.touched">
+        Street is required!
+      </div>
+      <div *ngIf="street.errors['minlength'] && street.touched">
+        Street minimum lenghth is {{street.errors['minlength'].requiredLength}}
+      </div>
+
+      <div *ngIf="street.errors['pattern'] && street.touched">
+        Street pattern is {{street.errors['pattern'].requiredPattern}}
+        <p>Inserting numbers is prohibited!</p>
+      </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+    <label for="">Zip code: </label>
+    <input type="string" id="zip_code" name="zip_code" #zip_code="ngModel" [(ngModel)]="contact.zip_code" minlength="4"
+      maxlength="6" pattern="^[0-9]*$" [ngClass]="{
+    'is-invalid': zip_code.invalid && zip_code.dirty,
+    'is-valid': zip_code.valid && zip_code.dirty
+    }" required>
+
+    <br>
+    <br>
+
+    <div *ngIf="!zip_code.valid && (zip_code.dirty || zip_code.touched)" [ngClass]=" 'error' ">
+      <!--  Invalid zip code! -->
+
+      <div *ngIf="zip_code.errors['required'] && zip_code.touched">
+          Zip code is required!
+      </div>
+      <div *ngIf="zip_code.errors['minlength'] && zip_code.touched">
+        Zip code minimum lenghth is {{zip_code.errors['minlength'].requiredLength}}
+      </div>
+
+      <div *ngIf="zip_code.errors['pattern'] && zip_code.touched">
+        Zip code pattern is {{zip_code.errors['pattern'].requiredPattern}}
+        <p>Accept only numbers!</p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+
+
+
+
+  <div>
+    <button class="btn b-2" type="submit" [hidden]="contactForm.invalid">Submit</button>
+  </div>
+
 </form>
+</div>
+
+
+
 
 <br>
-<pre>
-  <code>
-   {{contactForm.value | json}}
-  </code>
-</pre>
+<br>
+<br>
+<div style="text-align: center; background-color: black; font-size: 25px; font-weight: bold;">
+  <p
+    style="color: rgb(145, 255, 0); border: 2px solid rgb(94, 255, 0); display: inline-block;">
+    ContactForm is valid?
+    <span style="color: white;"> : </span>
+    <span style="color:rgb(255, 238, 0)!important;"> {{ contactForm.valid }}</span>
+  </p>
+
+  <br>
+
+  <p style="color: rgb(94, 255, 0); display: inline-block;">-- Form Value: </p>
+    <pre style="color: white; font-size: 16px!important;">
+      <code>{{ contactForm.value | json }}</code>
+    </pre>
+
+  <p style="color: rgb(94, 255, 0); display: inline-block;">-- Model Value: </p>
+    <pre style="color: white; font-weight: bold; font-size: 16px!important;">
+      <code>{{contact|json}} </code>
+    </pre>
+  
+</div>
