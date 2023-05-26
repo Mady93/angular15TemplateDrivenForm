@@ -12,16 +12,16 @@
 
   <div *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)">
    <!--  Invalid firstname! -->
-   [ngClass]="error"
+   [ngClass]=" 'error' "
 
-    <div *ngIf="firstname.errors['required']" && firstname.touched>
+    <div *ngIf="firstname.errors['required'] && firstname.touched">
       Firstname is required!
     </div>
     <div *ngIf="firstname.errors['minlength'] && firstname.touched">
       Firstname minimum lenghth is {{firstname.errors['minlength'].requiredLength}} 
     </div>
 
-    <div *ngIf="firstname.errors['pattern']" && firstname.touched>
+    <div *ngIf="firstname.errors['pattern'] && firstname.touched">
       Firstname pattern is {{firstname.errors['pattern'].requiredPattern}} 
       Inserire lettere da aA - zZ senza spazzi vuoti!
     </div>
@@ -38,16 +38,16 @@
  
   <div *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)">
     <!-- Invalid lastname! -->
-    [ngClass]="error"
+    [ngClass]="'error'"
 
-    <div *ngIf="lastname.errors['required']" && lastname.touched>
+    <div *ngIf="lastname.errors['required'] && lastname.touched">
       Lastname is required!
     </div>
-    <div *ngIf="lastname.errors['minlength']" && lastname.touched>
+    <div *ngIf="lastname.errors['minlength'] && lastname.touched">
       Lastname minimum lenghth is {{lastname.errors['minlength'].requiredLength}} 
     </div>
 
-    <div *ngIf="lastname.errors['pattern']" && lastname.touched>
+    <div *ngIf="lastname.errors['pattern'] && lastname.touched">
       lastname pattern is {{lastname.errors['pattern'].requiredPattern}} 
       Inserire lettere da aA - zZ senza spazzi vuoti!
     </div>
@@ -66,13 +66,13 @@
  
   <div *ngIf="!email.valid && (email.dirty || email.touched)">
     <!-- Invalid email! -->
-    [ngClass]="error"
+    [ngClass]="'error'"
 
-    <div *ngIf="email.errors['required']" && email.touched>
+    <div *ngIf="email.errors['required'] && email.touched">
       Email is required!
     </div>
 
-    <div *ngIf="email.errors['pattern']" && email.touched>
+    <div *ngIf="email.errors['pattern'] && email.touched">
       Email pattern is {{email.errors['pattern'].requiredPattern}}
     </div>
   </div>
